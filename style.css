@@ -1,0 +1,30 @@
+body {
+  width: 100%;
+}
+
+#loadingMessage {
+  display: none;
+}
+
+.content table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 15px;
+
+  font-family: "omyu_pretty", Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  text-align: center;
+  width: 900px;
+  background-color: aquamarine;
+  table-layout: fixed;
+  border: 3px solid #000;
+}
+
+.content table thead {
+  color: #fff;
+}
+
+.content table tbody tr th:first-child {
+  color: #fff;
+  background-color: #06343e;
+}

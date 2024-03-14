@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MySQL Data to Sheet to WebApp</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button onclick="importData()">Import MySQL Data to Sheet</button>
+    <div id="loadingMessage">리스트 갱신중...</div>
+    <select id="dropdown"></select>
+
+    <div class="content">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="3" style="background-color: #ff0000">홍방</th>
+            <th colspan="3" style="background-color: #000bf8">청방</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>경고</th>
+            <th>업</th>
+            <th>숫자</th>
+            <th>다운</th>
+            <th>업</th>
+            <th>숫자</th>
+            <th>다운</th>
+          </tr>
+
+          <tr>
+            <th>주의</th>
+            <th>업</th>
+            <th>숫자</th>
+            <th>다운</th>
+            <th>업</th>
+            <th>숫자</th>
+            <th>다운</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      function importData() {
+        document.getElementById("loadingMessage").style.display = "block"; // 리스트 갱신 시작시 로딩 메시지 표시
+        google.script.run
+          .withSuccessHandler(loadDropdown)
+          .importDataFromMySQL();
+      }
+
+      function loadDropdown() {
+        google.script.run
+          .withSuccessHandler(function (data) {
+            var dropdown = document.getElementById("dropdown");
+            dropdown.innerHTML = ""; // 드롭다운 초기화
+            data.forEach(function (item) {
+              var option = document.createElement("option");
+              option.value = option.text = item;
+              dropdown.add(option);
+            });
+            document.getElementById("loadingMessage").style.display = "none"; // 로딩 메시지 숨김
+            alert("갱신이 완료되었습니다."); // 갱신 완료 알림
+          })
+          .getSheetData();
+      }
+
+      document.addEventListener("DOMContentLoaded", loadDropdown);
+    </script>
+  </body>
+</html>
+
+<!-- // 아씨 이거 안되네 -->
